@@ -2,6 +2,9 @@ import express from 'express';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
+// routes import 
+import testRoutes from './routes/testRoutes.js';
+
 // dot env config
 dotenv.config();
 
@@ -18,9 +21,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 //route
-app.get('/', (req, res) => {
-    return res.status(200).send("<h1>Welcome to Node server</h1>");
-})
+app.use('/api/v1', testRoutes);
 
 //Listen
 app.listen(PORT, () => {
