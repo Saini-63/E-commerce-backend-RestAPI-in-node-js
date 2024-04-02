@@ -1,10 +1,21 @@
 import express from 'express';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+
+// dot env config
+dotenv.config();
+
 
 //PORT
-const PORT = 8000;
+const PORT = process.env.PORT || 8080;
+
 
 //rest object
 const app = express();
+
+//middleware
+app.use(morgan('dev'));
+app.use(express.json());
 
 //route
 app.get('/', (req, res) => {

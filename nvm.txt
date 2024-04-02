@@ -1,3 +1,7 @@
- 18.20.0
+1) 18.20.0
 
- what is the difference between npm install -g nodemon  and npm install --save-dev nodemon and npm install nodemon.
+2) what is the difference between npm install -g nodemon  and npm install --save-dev nodemon and npm install nodemon.
+
+3) we place dotenv.config() on top after import otherwise it will not work
+import dotenv from 'dotenv';
+dotenv.config();
