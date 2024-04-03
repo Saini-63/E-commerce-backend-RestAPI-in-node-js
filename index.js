@@ -7,7 +7,7 @@ import connectDB from './config/db.js';
 
 // routes import 
 import testRoutes from './routes/testRoutes.js';
-
+import userRoutes from './routes/userRoutes.js';
 
 // dot env config
 dotenv.config();
@@ -27,6 +27,7 @@ app.use(express.json());
 
 //route
 app.use('/api/v1', testRoutes);
+app.use('/api/v1/user', userRoutes);
 
 //Listen
 app.listen(PORT, () => {
