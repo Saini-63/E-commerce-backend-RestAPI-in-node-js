@@ -10,6 +10,16 @@ export const registerController = async (req, res) => {
                 message: 'Please Provide all fields',
             })
         }
+
+        // check Existing user
+        const existingUser = await userModel.findOne({ email })
+        //Existing User validation
+        if (existingUser) {
+            return res.status(500).send({
+                success: false,
+                message: 'E-mail already taken'
+            })
+        }
         const user = await userModel.create({
             name,
             email,
