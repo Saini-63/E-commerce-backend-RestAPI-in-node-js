@@ -83,6 +83,7 @@ export const loginController = async (req, res) => {
                 message: 'Invalid Credentials',
             })
         }
+
         //Token
         const token = user.generateToken();
         res.status(200).cookie('token', token, {
@@ -102,6 +103,48 @@ export const loginController = async (req, res) => {
             success: false,
             message: 'Error in Login API',
             error,
+        })
+    }
+}
+
+// GET USER PROFILE
+export const getUserProfileController = async (req, res) => {
+    try {
+        const user = await userModel.findById(req.user._id);
+        user.password = undefined;
+        res.status(200).send({
+            success: true,
+            message: 'User Profile Fetched Successfully',
+            user,
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: 'Error in Profile API',
+            error
+        })
+    }
+}
+
+//LOGOUT
+export const logoutController = async (req, res) => {
+    try {
+        res.status(200).cookie('token', '', {
+            expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+            secure: process.env.NODE_ENV === 'development' ? true : false,
+            httpOnly: process.env.NODE_ENV === 'development' ? true : false,
+            sameSite: process.env.NODE_ENV === 'development' ? true : false,
+        }).send({
+            success: true,
+            message: 'Log-Out Successfully!',
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: 'Error in Logout API',
+            error
         })
     }
 }
