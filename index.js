@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 //Database import
 import connectDB from './config/db.js';
@@ -24,6 +25,7 @@ const app = express();
 //middleware
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(cookieParser());
 
 //route
 app.use('/api/v1', testRoutes);
@@ -31,6 +33,6 @@ app.use('/api/v1/user', userRoutes);
 
 //Listen
 app.listen(PORT, () => {
-    console.log(`Server  is running on port ${PORT}`);
+    console.log(`Server  is running on port ${PORT} and in  ${process.env.NODE_ENV} Mode`);
 })
 
